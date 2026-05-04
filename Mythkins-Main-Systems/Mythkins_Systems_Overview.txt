@@ -1,0 +1,12 @@
+Context:
+I created several systems for gameplay and data management for Mythkins, some of which I will highlight here.
+
+Save/Load System
+Data that is stored in single integer or boolean variables is saved and loaded via Player Prefs, such as days passed, score, or joystick settings.  More complex data for the pets is saved via text files.  One file is saved per active pet in the game sanctuary.  Each line corresponds to a different piece of data (name, type, affection score, last position in the sanctuary, and number).  The files are named with the pet name, stored in a manager for easy access. All data is saved between scene changes and when the player clicks the save button on the pause menu.  Data is loaded in at the beginning of the game, and checks for new data to load between scene changes, for optimization, given the target hardware of this game is mobile.
+
+
+Pet Creation
+Pets are created at the beginning of the game, one of each type.  As each type is successfully recovered through minigame gameplay, new pets of each type are created to keep the gameplay loop going.  New save files for each pet are created as new pets are initialized.  Of each type, names are picked randomly from a set name pool, which is then removed and returned as the pet is created or leaves the sanctuary.  If I had more time to work on the project before its deadline, I would have liked to implement a system where the player can name pets when they are created instead of implementing the preset pool.
+Pets have a script holding their data and behavior which inherits from a base pet class.  Each type of pet has its own script, which controls its behavior within their respective minigame (such as different movement or input), but data and behavior that is shared between them is defined in the base pet class. Child classes also can override behaviors on creation and on save.
+
+
